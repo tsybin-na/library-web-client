@@ -3,10 +3,16 @@
   margin-bottom: 30px;
 }
 
-.button-panel a {
+.button-panel button {
   margin-right: 5px;
 }
 
 .action-icons a {
   margin-right: 10px;
+}
+
+.percentage-value {
+  display: inline-block;
+  width: 17px;
+  margin-right: 2px;
 }
