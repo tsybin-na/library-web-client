@@ -1,0 +1,75 @@
+<div class="main-page-form">
+  <form autocomplete="off">
+    <div class="mb-3">
+      <label for="inputName" class="form-label">Наименование</label>
+      <input class="form-control {{getValidationClass('name')}}" id="inputName" name="name" aria-describedby="nameHelp"
+             [(ngModel)]="book.name">
+      <div id="nameHelp" class="form-text" [hidden]="hasError">Указанное наименование будет отображаться в списке</div>
+      <div class="valid-feedback">
+        Указанное наименование будет отображаться в списке
+      </div>
+      <div class="invalid-feedback">
+        {{ getValidationError('name') }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="switchBestseller" name="bestseller"
+               [(ngModel)]="book.bestseller">
+        <label class="form-check-label" for="switchBestseller">Хит продаж</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="genreSelect">Жанр</label>
+      <select class="form-select {{getValidationClass('genre')}}" aria-label="Выбор жанра" id="genreSelect" name="genre"
+              [(ngModel)]="book.genre">
+        @for (genre of genres; track genre; ) {
+          <option value="{{ GenreEnum[genre] }}">{{ genre }}</option>
+        }
+      </select>
+      <div class="invalid-feedback">
+        {{ getValidationError('genre') }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="textareaDescription" class="form-label">Описание</label>
+      <textarea class="form-control {{getValidationClass('description')}}" id="textareaDescription" name="description"
+                rows="5"
+                [(ngModel)]="book.description"></textarea>
+      <div class="invalid-feedback">
+        {{ getValidationError('description') }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="minimumOnDisplayRange" class="form-label">Минимум книг на витрине: {{ book.minimumOnDisplay }}</label>
+      <input type="range" class="form-range" min="0" max="100" id="minimumOnDisplayRange" name="minimumOnDisplay"
+             [(ngModel)]="book.minimumOnDisplay">
+    </div>
+
+    <div class="mb-3">
+      @if (!getValidationError('authorsIds')) {
+        <div>Авторы</div>
+      } @else {
+        <div class="text-danger">
+          {{ getValidationError('authorsIds') }}
+        </div>
+      }
+      <hr>
+      @for (author of authors; track author.id; let index = $index) {
+        <div class="form-check form-check-inline">
+          <input class="form-check-input {{getValidationClass('authorsIds')}}" type="checkbox"
+                 id="authorCheckbox{{index}}"
+                 value="{{author.id}}"
+                 [checked]="authorWasSelected(author.id)"
+                 (click)="clickOnCheckboxGenre(author.id)">
+          <label class="form-check-label" for="authorCheckbox{{index}}">{{ author.name }}</label>
+        </div>
+      }
+    </div>
+    <button class="btn btn-primary btn-sm pull-right save-buttons" (click)="saveBook()">Сохранить</button>
+  </form>
+</div>

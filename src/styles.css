@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+.button-panel a {
+  margin-right: 5px;
+}
+
+.action-icons a {
+  margin-right: 10px;
+}
+
+.save-buttons {
+  margin-top: 10px;
+}
+
+.main-page-form {
+  padding: 20px 30px 60px 30px;
+  margin: 30px 5px 10px 5px;
+  border: 0.1rem solid #dee2e6;
+  border-radius: var(--bs-border-radius);
+}
